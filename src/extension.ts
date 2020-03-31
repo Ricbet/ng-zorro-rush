@@ -9,6 +9,8 @@ export async function activate(context: ExtensionContext) {
 
     languagesManager.registerLanguagesHoverProvider()
 
+    cli.runtime()
+
 }
 
 export function deactivate() { }

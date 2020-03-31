@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { extractTextForDocument, isRegForNZ } from '../utils';
 import { ExtensionCli } from './cli';
-import { getZorroVersion } from './resource/version';
 
 export class HoverProvider implements vscode.HoverProvider {
 
