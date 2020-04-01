@@ -49,12 +49,9 @@
 		"@types/yauzl": "^2.9.1",
 		"compressing": "^1.5.0",
 		"fs-extra": "^9.0.0",
-		"git-clone": "^0.1.0",
 		"mkdirp": "^1.0.3",
-		"pump": "^3.0.0",
 		"request": "^2.88.2",
 		"rimraf": "^3.0.2",
-		"tiny-version-compare": "^1.0.0",
-		"yauzl": "^2.10.0"
+		"tiny-version-compare": "^1.0.0"
 	}
 }

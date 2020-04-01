@@ -1,11 +1,12 @@
 // @ts-ignore
-import * as clone from "git-clone";
 import * as os from "os";
 import { getZorroVersion } from "./version";
-import { makesureDirExist, debugTypeName } from "../../utils";
+import { makesureDirExist, debugTypeName, TMP_PATH } from "../../utils";
+import { ZipManager } from "./zip";
 
 export class Resource {
     private zorroVersions: string[] | undefined = undefined;
+    private zipManager: ZipManager = new ZipManager();
 
     constructor() {
         /**
@@ -19,5 +20,9 @@ export class Resource {
             this.zorroVersions = await getZorroVersion();
         }
         return this.zorroVersions;
+    }
+
+    public async acquireTarForZorro(version: string): Promise<void> {
+        return this.zipManager.acquireTarForZorro(version);
     }
 }

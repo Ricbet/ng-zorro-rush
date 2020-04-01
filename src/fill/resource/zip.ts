@@ -26,7 +26,7 @@ export class ZipManager {
     /**
      * 执行解压操作
      */
-    public async tarZxvfUnzip(version: string, tarPath: string = path.join(TMP_PATH, "zorro.tar.gz")): Promise<void> {
+    private async tarZxvfUnzip(version: string, tarPath: string): Promise<void> {
         return new Promise(tarFinish => {
             const versionPath = path.join(TMP_PATH, version);
 
@@ -68,12 +68,13 @@ export class ZipManager {
         });
     }
 
-    public async acquireTarForZorro(version: string, targetDir: string = TMP_PATH): Promise<void> {
+    public async acquireTarForZorro(version: string): Promise<void> {
         return new Promise(resolveInner => {
             const tmpTarFetchDir = path.join(TMP_PATH, "zorro.tar.gz");
 
             if (this.isExistsLibForVersion(version)) {
                 logger.appendLine(`${version} exist!`);
+                resolveInner()
                 return;
             }
 

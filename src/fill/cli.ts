@@ -8,15 +8,15 @@ import { logger } from "../logger";
 
 export class ExtensionCli {
     private resource: Resource = new Resource();
-    private zipManager: ZipManager = new ZipManager();
 
     constructor() {}
 
     public async runtime(): Promise<void> {
         const alls = await this.resource.getAllZorroVersions();
-        logger.appendLine(`tmp path: > ${TMP_PATH}`)
+        logger.appendLine(`Tmp path: > ${TMP_PATH}`);
+        logger.appendLine(`All versions: > ${alls}`);
         for (const v of alls) {
-            await this.zipManager.acquireTarForZorro(v);
+            await this.resource.acquireTarForZorro(v);
         }
     }
 }
