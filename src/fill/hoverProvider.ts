@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 import { extractTextForDocument, isRegForNZ } from '../utils';
 import { ExtensionCli } from './cli';
 

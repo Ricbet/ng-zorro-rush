@@ -1,13 +1,24 @@
 import * as vscode from "vscode";
 import * as os from "os";
+import * as path from "path";
+import * as fs from "fs";
 import { getZorroVersion } from "./version";
 import { makesureDirExist, debugTypeName, TMP_PATH } from "../../utils";
 import { ZipManager } from "./zip";
+<<<<<<< HEAD
 import { logger } from "../../logger";
+=======
+import { DocModel } from "./doc";
+>>>>>>> DocModel
 
 export class Resource {
     private zorroVersions: string[] | undefined = undefined;
     private zipManager: ZipManager = new ZipManager();
+
+    /**
+     * key 为版本号
+     */
+    private docsMap: Map<string, DocModel> = new Map();
 
     constructor() {
         /**
@@ -24,6 +35,7 @@ export class Resource {
     }
 
     public async acquireTarForZorro(version: string): Promise<void> {
+<<<<<<< HEAD
         const text = `WWaiting to download version ${version} of zorro ... `;
 
         logger.appendLine(text);
@@ -38,5 +50,16 @@ export class Resource {
                 return Promise.resolve();
             }
         );
+=======
+        await this.zipManager.acquireTarForZorro(version);
+
+        if (this.docsMap.get(version)) return;
+
+        const componentsParentPath = path.join(TMP_PATH, version, `ng-zorro-antd-${version}`, "components");
+
+        if (fs.existsSync(componentsParentPath)) {
+            this.docsMap.set(version, new DocModel(version, componentsParentPath));
+        }
+>>>>>>> DocModel
     }
 }
