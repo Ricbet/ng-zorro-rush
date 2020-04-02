@@ -97,7 +97,7 @@ export class ZipManager {
 
             doStream.addListener("finish", async () => {
                 logger.appendLine(`Download doc for ${url} success !`);
-                logger.appendLine(`Waiting unzip zorro !`);
+                logger.appendLine(`Waiting uncompress zorro !`);
                 await this.tarZxvfUnzip(version, tmpTarFetchDir);
                 fs.unlinkSync(tmpTarFetchDir);
                 resolveInner();

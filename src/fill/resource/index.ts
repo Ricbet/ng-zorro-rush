@@ -1,8 +1,9 @@
-// @ts-ignore
+import * as vscode from "vscode";
 import * as os from "os";
 import { getZorroVersion } from "./version";
 import { makesureDirExist, debugTypeName, TMP_PATH } from "../../utils";
 import { ZipManager } from "./zip";
+import { logger } from "../../logger";
 
 export class Resource {
     private zorroVersions: string[] | undefined = undefined;
@@ -23,6 +24,19 @@ export class Resource {
     }
 
     public async acquireTarForZorro(version: string): Promise<void> {
-        return this.zipManager.acquireTarForZorro(version);
+        const text = `WWaiting to download version ${version} of zorro ... `;
+
+        logger.appendLine(text);
+
+        return vscode.window.withProgress(
+            {
+                location: vscode.ProgressLocation.Window,
+                title: text,
+            },
+            async () => {
+                await this.zipManager.acquireTarForZorro(version);
+                return Promise.resolve();
+            }
+        );
     }
 }
