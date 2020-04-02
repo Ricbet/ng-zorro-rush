@@ -68,13 +68,13 @@ export class ZipManager {
         });
     }
 
-    public async acquireTarForZorro(version: string): Promise<void> {
+    public async acquireTarForZorro(version: string): Promise<boolean> {
         return new Promise(resolveInner => {
             const tmpTarFetchDir = path.join(TMP_PATH, "zorro.tar.gz");
 
             if (this.isExistsLibForVersion(version)) {
                 logger.appendLine(`${version} exist!`);
-                resolveInner()
+                resolveInner(false)
                 return;
             }
 
@@ -88,7 +88,7 @@ export class ZipManager {
                     logger.appendLine(`${url} error`);
                     upshot.destroy();
                     fs.unlinkSync(tmpTarFetchDir);
-                    resolveInner();
+                    resolveInner(false);
                     return;
                 }
                 upshot.pipe(doStream);
@@ -100,7 +100,7 @@ export class ZipManager {
                 logger.appendLine(`Waiting uncompress zorro !`);
                 await this.tarZxvfUnzip(version, tmpTarFetchDir);
                 fs.unlinkSync(tmpTarFetchDir);
-                resolveInner();
+                resolveInner(true);
             });
         });
     }

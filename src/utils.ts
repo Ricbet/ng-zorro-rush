@@ -29,4 +29,6 @@ export const extractTextForDocument = (document: vscode.TextDocument, range: vsc
     return document.lineAt(range.start.line).text.slice(range.start.character, range.end.character);
 };
 
+export const extractNZCharacter = (s: string): string => s.replace(/^(nz-)/g, "");
+
 export const isRegForNZ = (s: string): boolean => new RegExp(/^(nz-)/g).test(s);
