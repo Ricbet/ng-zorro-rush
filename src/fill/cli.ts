@@ -16,7 +16,7 @@ export class ExtensionCli {
         logger.appendLine(`Tmp path: > ${TMP_PATH}`);
         logger.appendLine(`All versions: > ${alls}`);
         for (const v of alls) {
-            await this.resource.acquireTarForZorro(v);
+            // await this.resource.acquireTarForZorro(v);
         }
     }
 }
