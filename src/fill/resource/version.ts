@@ -22,15 +22,23 @@ export const getZorroVersion = async (): Promise<string[]> => {
     const versions: string[] = [];
 
     for (const path of resolvePath) {
+        const parse = await readPackJson(path);
+        versions.push(parse ? parse : "")
+    }
+
+    return Array.from(new Set(versions)).filter(Boolean).map(e => semver.minVersion(e)?.version!)
+}
+
+export const readPackJson = async (path: string): Promise<string | undefined> => {
+    return new Promise(res => {
         const readJson = fs.readFileSync(path, { encoding: "utf8" })
         try {
             const parse = JSON.parse(readJson);
             const dependencies = parse.dependencies;
-            versions.push(dependencies["ng-zorro-antd"])
+            res(dependencies["ng-zorro-antd"])
         } catch (error) {
             logger.appendLine(`read package.json error: > ${error.toString()}`)
+            res(undefined)
         }
-    }
-
-    return Array.from(new Set(versions)).map(e => semver.minVersion(e)?.version!).filter(Boolean)
+    })
 }

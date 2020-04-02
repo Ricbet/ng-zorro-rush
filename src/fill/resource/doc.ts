@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import * as vscode from "vscode";
 import { MarkdownString } from "vscode";
 
 export enum EI18n {
@@ -34,6 +35,18 @@ export class DocModel {
         return this;
     }
 
+    public async getComponentDoc(comp: string): Promise<MarkdownString> {
+        const mark = new vscode.MarkdownString();
+
+        if (this.sourceMap.has(comp)) {
+            const mdPath = this.sourceMap.get(comp)!.path;
+            mark.appendMarkdown(fs.readFileSync(mdPath + `/index.${this.i18nType}.md`, { encoding: "utf8" }));
+            return Promise.resolve(mark);
+        }
+
+        return Promise.resolve(mark);
+    }
+
     /**
      * 序列化组件名称与文档路径
      */
@@ -43,7 +56,7 @@ export class DocModel {
 
         findFolder.forEach(dir => {
             this.sourceMap.set(dir, {
-                path: path.join(this.cwdPath, dir, "doc", `index.${this.i18nType}.md`),
+                path: path.join(this.cwdPath, dir, "doc"),
             });
         });
     }
