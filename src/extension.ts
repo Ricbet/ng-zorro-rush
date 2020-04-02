@@ -1,7 +1,6 @@
 import { ExtensionContext } from 'vscode';
 import LanguagesManager from './fill/languages';
 import { ExtensionCli } from './fill/cli';
-import { getZorroVersion } from './fill/resource/version';
 
 export async function activate(context: ExtensionContext) {
     const cli: ExtensionCli = new ExtensionCli();
@@ -9,8 +8,7 @@ export async function activate(context: ExtensionContext) {
 
     languagesManager.registerLanguagesHoverProvider()
 
-    cli.runtime()
-
+    cli.preInstall()
 }
 
 export function deactivate() { }

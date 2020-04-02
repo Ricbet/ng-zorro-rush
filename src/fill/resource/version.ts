@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as glob from "glob";
+import * as semver from "semver";
 import { getWorkspaceRootPath } from "../../utils";
 import { logger } from "../../logger";
 
@@ -31,5 +32,5 @@ export const getZorroVersion = async (): Promise<string[]> => {
         }
     }
 
-    return Array.from(new Set(versions)).map(e => e.replace("^", "")).filter(Boolean)
+    return Array.from(new Set(versions)).map(e => semver.minVersion(e)?.version!).filter(Boolean)
 }

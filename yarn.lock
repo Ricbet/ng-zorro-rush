@@ -116,6 +116,13 @@
     "@types/glob" "*"
     "@types/node" "*"
 
+"@types/semver@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.npm.taobao.org/@types/semver/download/@types/semver-7.1.0.tgz?cache=0&sync_timestamp=1580871311074&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsemver%2Fdownload%2F%40types%2Fsemver-7.1.0.tgz#c8c630d4c18cd326beff77404887596f96408408"
+  integrity sha1-yMYw1MGM0ya+/3dASIdZb5ZAhAg=
+  dependencies:
+    "@types/node" "*"
+
 "@types/tough-cookie@*":
   version "2.3.6"
   resolved "https://registry.npm.taobao.org/@types/tough-cookie/download/@types/tough-cookie-2.3.6.tgz#c880579e087d7a0db13777ff8af689f4ffc7b0d5"
